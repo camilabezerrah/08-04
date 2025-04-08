@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio do Futuro</title>
+</head>
+<body>
+    <header>
+        <h1>Restaurante IFPR</h1>
+        <img src="logo.png" alt="Logo do Restaurante IFPR" class="logo">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" aria-label="Abrir menu de categorias" aria-expanded="false">Menu</a>
+                <ul class="dropdown" role="menu">
+                    <li><a role="menuitem" href="#sopa" aria-label="Sopa de legumes">Sopas</a></li>
+                    <li><a role="menuitem" href="#lasanha" aria-label="Lasanha">Massas</a></li>
+                    <li><a role="menuitem" href="#feijoada" aria-label="Feijoada">Pratos típicos</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <article id="cardapio">
+            <script>
+                const menuData = [
+                    { nome: 'Sopa de Legumes', descricao: 'Uma deliciosa combinação de legumes frescos cozidos lentamente, resultando em uma sopa nutritiva e reconfortante.', preco: '20,00', imgSrc: 'sopadelegumes.jpg' },
+                    { nome: 'Sopa de Mandioca', descricao: 'Uma sopa cremosa de mandioca com carne desfiada ou legumes, com temperos especiais.', preco: '25,00', imgSrc: 'sopademandioca.jpg' },
+                    { nome: 'Lasanha', descricao: 'Camadas de massa de trigo, molho de carne, queijo derretido e molho bechamel.', preco: '40,00', imgSrc: 'lasanha.jpg' },
+                    { nome: 'Macarrão Alho e Óleo', descricao: 'Macarrão al dente envolvido em molho de alho dourado, azeite de oliva e ervas frescas.', preco: '15,00', imgSrc: 'macarrãoalhoeóleo.jpg' },
+                    { nome: 'Feijoada', descricao: 'Feijão preto com carnes variadas, arroz, farofa, couve e laranja.', preco: '35,00', imgSrc: 'feijoada.webp' },
+                    { nome: 'Acarajé', descricao: 'Bolinho frito de feijão-fradinho, recheado com vatapá, caruru e camarões secos.', preco: '45,00', imgSrc: 'acarajé.jpg' }
+                ];
+        
+                const itemCard = (nome, descricao, preco, imgSrc) => `
+                    <section>
+                        <h2>${nome}</h2>
+                        <img src="${imgSrc}" alt="${nome}" loading="lazy">
+                        <p>${descricao}</p>
+                        <p>R$ ${preco}</p>
+                        <button class="adicionar-carrinho" aria-label="Adicionar ${nome} ao carrinho">Adicionar ao Carrinho</button>
+                    </section>
+                `;
+        
+                const renderMenu = (menuData) => {
+                    const menuContainer = document.getElementById('cardapio');
+                    menuData.forEach(item => {
+                        menuContainer.innerHTML += itemCard(item.nome, item.descricao, item.preco, item.imgSrc);
+                    });
+                };
+        
+                renderMenu(menuData);
+        
+                document.querySelectorAll('.adicionar-carrinho').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        alert(`${event.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent} foi adicionado ao carrinho!`);
+                    });
+                });
+            </script>
+        </article>
+    </main>
+    <footer>© Restaurante IFPR 2025</footer>
+</body>
+</html>
